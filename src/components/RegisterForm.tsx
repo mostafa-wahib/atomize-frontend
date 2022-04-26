@@ -19,11 +19,11 @@ function RegisterForm() {
     },
   });
   return (
-    <Center style={{ minHeight: "100vh", minWidth: "100vw" }}>
-      <Card shadow="sm" className={classes["card"]}>
+    <Center className={classes.register}>
+      <Card shadow="sm" className="form__card">
         <Center>
           <form
-            className={classes["registration-box__form"]}
+            className="form"
             onSubmit={form.onSubmit((values) => console.log(values))}
           >
             <TextInput

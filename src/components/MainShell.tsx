@@ -1,4 +1,4 @@
-import { AppShell, Navbar, Header } from "@mantine/core";
+import { AppShell } from "@mantine/core";
 import HeaderNav from "./HeaderNav";
 function MainShell(props: any) {
   return (
@@ -7,10 +7,8 @@ function MainShell(props: any) {
       header={<HeaderNav />}
       styles={(theme) => ({
         main: {
-          backgroundColor:
-            theme.colorScheme === "dark"
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
+          backgroundColor: theme.colors.gray[2],
+          minHeight: "calc(100vh - 60px)",
         },
       })}
     >
