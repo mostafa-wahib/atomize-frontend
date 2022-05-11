@@ -1,23 +1,36 @@
-import { createContext, useState } from "react";
+import React, { createContext, useMemo, useState } from "react";
 interface Children {
   children: JSX.Element;
 }
-export interface UserContextInterface {
+export interface UserData {
   email: string;
   accessToken: string;
   refreshToken: string;
   loggedIn: boolean;
 }
-const defaultValue = {
+export interface UserDataContext {
+  userData: UserData;
+  setUserData: (data: UserData) => void;
+}
+type Props = {
+  children?: React.ReactNode;
+};
+const defaultData: UserData = {
   email: "",
   accessToken: "",
   refreshToken: "",
   loggedIn: false,
 };
-export const UserContext = createContext<UserContextInterface>(defaultValue);
-const UserContextProvider = ({ children }: Children) => {
-  const [userData, setUserData] = useState(defaultValue);
-  <UserContext.Provider value={userData}>{children}</UserContext.Provider>;
+export const UserContext = createContext<UserDataContext | null>(null);
+const UserContextProvider: React.FC = ({ children }: Props) => {
+  const [userData, setUserData] = useState<UserData>(defaultData);
+  // const value = useMemo(() => ({ userData, setUserData }), [userData]);
+
+  return (
+    <UserContext.Provider value={{ userData, setUserData }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default UserContextProvider;
