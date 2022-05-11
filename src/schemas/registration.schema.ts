@@ -5,10 +5,10 @@ const registrationSchema = object({
   password: string().min(8, {
     message: "Password must be at least 8 characters long",
   }),
-  passwordConfirm: string(),
-}).refine((data) => data.password === data.passwordConfirm, {
+  passwordConfirmation: string(),
+}).refine((data) => data.password === data.passwordConfirmation, {
   message: "Passwords don't match",
-  path: ["passwordConfirm"],
+  path: ["passwordConfirmation"],
 });
 
 export default registrationSchema;
