@@ -17,7 +17,7 @@ interface UserRegistrationData {
   passwordConfirmation: string;
 }
 function RegisterForm() {
-  const form = useForm({
+  const form = useForm<UserRegistrationData>({
     schema: zodResolver(registrationSchema),
     initialValues: { email: "", password: "", passwordConfirmation: "" },
   });
@@ -33,7 +33,7 @@ function RegisterForm() {
       // switch(response.status){
       //   case 404:
       // }
-    } catch (err: any) {}
+    } catch (err: any) { }
   }
   return (
     <Center className={classes.register}>
