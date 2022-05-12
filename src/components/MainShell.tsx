@@ -1,7 +1,8 @@
 import { AppShell } from "@mantine/core";
 import UserContextProvider from "../context/UserContext";
+import AppRoutes from "./AppRoutes";
 import HeaderNav from "./HeaderNav";
-function MainShell(props: any) {
+function MainShell() {
   return (
     <UserContextProvider>
       <AppShell
@@ -14,7 +15,8 @@ function MainShell(props: any) {
           },
         })}
       >
-        {props.children}
+        <AppRoutes />
+
       </AppShell>
     </UserContextProvider>
 

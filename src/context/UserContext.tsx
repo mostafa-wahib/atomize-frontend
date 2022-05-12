@@ -8,27 +8,29 @@ export interface UserData {
     refreshToken: string;
     loggedIn: boolean;
 }
-export interface UserDataContext {
-    userData: UserData;
-    setUserData: (data: UserData) => void;
-}
 const defaultData: UserData = {
     email: "",
     accessToken: "",
     refreshToken: "",
     loggedIn: false,
 };
-const defaultContext: UserDataContext = {
-    userData: defaultData,
-    setUserData: (data: UserData) => { return; },
+
+export interface UserContextInterface {
+    userData: UserData;
+    setUserData: React.Dispatch<React.SetStateAction<UserData>>;
 }
-export const UserContext = createContext<UserDataContext | null>(defaultContext);
+const defaultContext: UserContextInterface = {
+    userData: defaultData,
+    setUserData: (v: React.SetStateAction<UserData>) => null
+
+}
+export const UserContext = createContext<UserContextInterface>(defaultContext);
 const UserContextProvider: React.FC<Children> = ({ children }: Children) => {
     const [userData, setUserData] = useState<UserData>(defaultData);
     // const value = useMemo(() => ({ userData, setUserData }), [userData]);
 
     return (
-        <UserContext.Provider value={{ userData, setUserData }}>
+        <UserContext.Provider value={{ userData, setUserData } as UserContextInterface}>
             {children}
         </UserContext.Provider>
     );
