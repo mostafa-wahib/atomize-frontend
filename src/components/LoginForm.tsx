@@ -46,10 +46,6 @@ function LoginForm() {
             return navigate("/");
         }
     }
-    useEffect(() => {
-        setInterval(() => console.log("Current userData: ", userData), 3000
-        )
-    }, [])
     return (
         <Center style={{ minHeight: "100vh", minWidth: "100vw" }}>
             <Card shadow="sm" className="form__card">
