@@ -16,10 +16,8 @@ function MainShell() {
         })}
       >
         <AppRoutes />
-
       </AppShell>
     </UserContextProvider>
-
   );
 }
 
