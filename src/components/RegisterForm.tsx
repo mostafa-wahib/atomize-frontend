@@ -21,10 +21,6 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   register: {
     height: "100%",
   },
-  button: {
-    backgroundColor: theme.colors.accent[0],
-    "&:hover": { backgroundColor: theme.colors.accent[1] },
-  },
 }));
 function RegisterForm() {
   const { classes } = useStyles();
@@ -73,7 +69,7 @@ function RegisterForm() {
               {...form.getInputProps("passwordConfirmation")}
             />
             <Group position="center" mt="md">
-              <Button className={classes.button} type="submit">
+              <Button className={"button"} type="submit">
                 Submit
               </Button>
             </Group>

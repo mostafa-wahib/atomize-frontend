@@ -74,10 +74,3 @@ select {
     scroll-behavior: auto !important;
   }
 }
-.form {
-  width: 50%;
-}
-.form__card {
-  width: 75%;
-  max-width: 40em;
-}
