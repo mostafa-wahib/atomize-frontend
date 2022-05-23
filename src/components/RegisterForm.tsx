@@ -10,20 +10,13 @@ import { useForm, zodResolver } from "@mantine/form";
 import registrationSchema from "../schemas/registration.schema";
 import { useFetch } from "use-http";
 import { useNavigate } from "react-router-dom";
-import { createStyles } from "@mantine/core";
 
 interface UserRegistrationData {
   email: string;
   password: string;
   passwordConfirmation: string;
 }
-const useStyles = createStyles((theme, _params, getRef) => ({
-  register: {
-    height: "100%",
-  },
-}));
-function RegisterForm() {
-  const { classes } = useStyles();
+function RegisterForm({ classes }: any) {
   const form = useForm<UserRegistrationData>({
     schema: zodResolver(registrationSchema),
     initialValues: { email: "", password: "", passwordConfirmation: "" },
@@ -44,10 +37,10 @@ function RegisterForm() {
   }
   return (
     <Center className={classes.register}>
-      <Card shadow="sm" className="form__card">
+      <Card shadow="sm" className={classes.form__card}>
         <Center>
           <form
-            className="form"
+            className={classes.form}
             onSubmit={form.onSubmit((values) => registerUser(values))}
           >
             <TextInput
@@ -69,7 +62,7 @@ function RegisterForm() {
               {...form.getInputProps("passwordConfirmation")}
             />
             <Group position="center" mt="md">
-              <Button className={"button"} type="submit">
+              <Button className={classes.button} type="submit">
                 Submit
               </Button>
             </Group>

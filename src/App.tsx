@@ -1,6 +1,5 @@
 import MainShell from "./components/MainShell";
 import { MantineProvider, MantineThemeOverride } from "@mantine/core";
-import GlobalStyles from "./components/GlobalStyles";
 function App() {
   const theme: MantineThemeOverride = {
     fontFamily: "Red Hat Display",
@@ -10,7 +9,6 @@ function App() {
   };
   return (
     <MantineProvider theme={theme}>
-      <GlobalStyles />
       <MainShell />
     </MantineProvider>
   );
