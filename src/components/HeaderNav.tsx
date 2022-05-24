@@ -2,7 +2,10 @@ import { createStyles, Header } from "@mantine/core";
 import { Link } from "react-router-dom";
 import { UserContext, UserContextInterface } from "../context/UserContext";
 import { useContext } from "react";
-const useStyle = createStyles(() => ({
+const useStyle = createStyles((theme) => ({
+  header: {
+    padding: `0 ${theme.spacing.lg}px`,
+  },
   "header-nav": {
     display: "flex",
     alignItems: "center",
@@ -11,6 +14,7 @@ const useStyle = createStyles(() => ({
     "& a": {
       textDecoration: "none",
       color: "inherit",
+      fontSize: theme.other.fs.md,
     },
   },
 }));
@@ -18,10 +22,14 @@ function HeaderNav() {
   const { userData }: UserContextInterface = useContext(UserContext);
   const { classes } = useStyle();
   return (
-    <Header height={60} py="md">
+    <Header className={classes.header} height={60} py="md">
       <div className={classes["header-nav"]}>
         <Link to="/">Home</Link>
-        {!userData.loggedIn && <Link to="/login">Login</Link>}
+        {!userData.loggedIn && (
+          <Link style={{ marginLeft: "auto" }} to="/login">
+            Login
+          </Link>
+        )}
         {!userData.loggedIn && <Link to="/register">Register</Link>}
       </div>
     </Header>
