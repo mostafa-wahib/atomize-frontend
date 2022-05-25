@@ -4,7 +4,7 @@ import { UserContext, UserContextInterface } from "../context/UserContext";
 import { useContext } from "react";
 const useStyle = createStyles((theme) => ({
   header: {
-    padding: `0 ${theme.spacing.lg}px`,
+    padding: `0 ${theme.spacing.xl}px`,
   },
   "header-nav": {
     display: "flex",
@@ -13,7 +13,7 @@ const useStyle = createStyles((theme) => ({
     gap: "1em",
     "& a": {
       textDecoration: "none",
-      color: "inherit",
+      color: theme.colors.accent[1],
       fontSize: theme.other.fs.md,
     },
   },
