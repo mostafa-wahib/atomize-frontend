@@ -53,7 +53,6 @@ function LoginForm({ classes }: any) {
       return navigate("/");
     }
   }
-  console.log("classes haha", classes);
   return (
     <Center style={{ minHeight: "100vh", minWidth: "100vw" }}>
       <Card shadow="sm" className={classes.form__card}>
