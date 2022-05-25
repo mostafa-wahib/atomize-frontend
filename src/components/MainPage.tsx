@@ -18,7 +18,10 @@ function MainPage() {
         </Center>
       </Grid.Col>
       <Grid.Col lg={6}>Test</Grid.Col>
-      <Grid.Col span={12}>
+      <Grid.Col
+        span={12}
+        sx={(theme) => ({ backgroundColor: theme.colors.gray[4] })}
+      >
         <UrlShortener />
       </Grid.Col>
     </Grid>
