@@ -29,8 +29,6 @@ function UrlShortener() {
   async function handleShorten(data: UrlData) {
     setShort(null);
     await post("/url/shorten", data);
-    //console.log("Server URI, ", process.env.REACT_APP_serveruri);
-    //console.log("Response status, ", response.status);
     if (response.ok) return setShort(response.data.short);
     form.setFieldError("url", "something went wrong");
   }

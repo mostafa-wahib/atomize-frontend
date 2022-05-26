@@ -14,7 +14,10 @@ const useStyle = createStyles((theme) => ({
     "& a": {
       textDecoration: "none",
       color: theme.colors.accent[1],
-      fontSize: theme.other.fs.md,
+      fontSize: theme.other.fs.sm,
+      [`@media (min-width: ${theme.breakpoints.md}px)`]: {
+        fontSize: theme.other.fs.md,
+      },
     },
   },
 }));

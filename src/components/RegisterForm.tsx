@@ -10,29 +10,43 @@ import { useForm, zodResolver } from "@mantine/form";
 import registrationSchema from "../schemas/registration.schema";
 import { useFetch } from "use-http";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface UserRegistrationData {
   email: string;
   password: string;
   passwordConfirmation: string;
 }
+type ServerError = string | null;
 function RegisterForm({ classes }: any) {
   const form = useForm<UserRegistrationData>({
     schema: zodResolver(registrationSchema),
     initialValues: { email: "", password: "", passwordConfirmation: "" },
   });
   const navigate = useNavigate();
-  const { error, post, loading, response } = useFetch(
-    process.env.REACT_APP_serveruri
+  const { post, loading, response } = useFetch(
+    `${process.env.REACT_APP_serveruri}/api`
   );
+  const [serverError, setServerError] = useState<ServerError>(null);
   async function registerUser(data: UserRegistrationData) {
     try {
-      const result = await post("/api/users", data);
-      console.log("response: ", response);
+      await post("/users", data);
       if (response.ok) navigate("/login");
-      // switch(response.status){
-      //   case 404:
-      // }
+      console.log("status: ", response.status);
+      switch (response.status) {
+        case 404:
+          setServerError(
+            "It seems like our service is down. Please try again later."
+          );
+          break;
+        case 409:
+          form.setFieldError("email", "This username already exists.");
+          break;
+        default:
+          setServerError(
+            "Our service could not process your request. Please try again later"
+          );
+      }
     } catch (err: any) {}
   }
   return (
