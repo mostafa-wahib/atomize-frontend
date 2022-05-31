@@ -25,7 +25,7 @@ function RegisterForm({ classes }: any) {
   });
   const navigate = useNavigate();
   const { post, loading, response } = useFetch(
-    `${process.env.REACT_APP_serveruri}/api`
+    `${process.env.REACT_APP_serveruri}/v1`
   );
   const [serverError, setServerError] = useState<ServerError>(null);
   async function registerUser(data: UserRegistrationData) {

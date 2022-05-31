@@ -1,40 +1,25 @@
-import { createStyles, Header } from "@mantine/core";
-import { Link } from "react-router-dom";
-import { UserContext, UserContextInterface } from "../context/UserContext";
-import { useContext } from "react";
+import { createStyles, Header, MediaQuery } from "@mantine/core";
+import Nav from "./Nav";
+interface Props {
+  children: JSX.Element;
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
 const useStyle = createStyles((theme) => ({
   header: {
     padding: `0 ${theme.spacing.xl}px`,
   },
-  "header-nav": {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "1em",
-    "& a": {
-      textDecoration: "none",
-      color: theme.colors.accent[1],
-      fontSize: theme.other.fs.sm,
-      [`@media (min-width: ${theme.breakpoints.md}px)`]: {
-        fontSize: theme.other.fs.md,
-      },
-    },
-  },
 }));
-function HeaderNav() {
-  const { userData }: UserContextInterface = useContext(UserContext);
+function HeaderNav({ children }: Partial<Props>) {
   const { classes } = useStyle();
   return (
     <Header className={classes.header} height={60} py="md">
-      <div className={classes["header-nav"]}>
-        <Link to="/">Home</Link>
-        {!userData.loggedIn && (
-          <Link style={{ marginLeft: "auto" }} to="/login">
-            Login
-          </Link>
-        )}
-        {!userData.loggedIn && <Link to="/register">Register</Link>}
-      </div>
+      <MediaQuery
+        largerThan="sm"
+        styles={{ backgroundColor: "green", display: "none" }}
+      >
+        <Nav />
+      </MediaQuery>
     </Header>
   );
 }

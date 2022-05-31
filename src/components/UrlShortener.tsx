@@ -24,7 +24,7 @@ function UrlShortener() {
   });
 
   const { error, post, loading, response } = useFetch(
-    `${process.env.REACT_APP_serveruri}/api`
+    `${process.env.REACT_APP_serveruri}/v1`
   );
   async function handleShorten(data: UrlData) {
     setShort(null);

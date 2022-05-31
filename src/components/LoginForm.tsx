@@ -37,11 +37,11 @@ function LoginForm({ classes }: any) {
     UserContext
   ) as UserContextInterface;
   const { error, post, loading, response } = useFetch<LoginResponse>(
-    process.env.REACT_APP_serveruri
+    `${process.env.REACT_APP_serveruri}/v1`
   );
   const navigate = useNavigate();
   async function handleLogin(logindata: LoginData) {
-    await post("/api/sessions", logindata);
+    await post("/sessions", logindata);
     if (response.ok && response.data) {
       const updatedData: UserData = {
         email: logindata.email,
