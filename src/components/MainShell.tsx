@@ -7,7 +7,7 @@ function MainShell() {
   return (
     <AppShell
       padding="md"
-      header={<HeaderNav />}
+      header={<HeaderNav opened={opened} setOpened={setOpened} />}
       styles={(theme) => ({
         main: {
           backgroundColor: theme.colors.gray[2],

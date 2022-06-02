@@ -1,24 +1,21 @@
-import { createStyles, Header, MediaQuery } from "@mantine/core";
+import { createStyles, Header, MediaQuery, Burger } from "@mantine/core";
 import Nav from "./Nav";
 interface Props {
-  children: JSX.Element;
-  open: boolean;
-  setOpen: (open: boolean) => void;
+  opened: boolean;
+  setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const useStyle = createStyles((theme) => ({
   header: {
     padding: `0 ${theme.spacing.xl}px`,
   },
 }));
-function HeaderNav({ children }: Partial<Props>) {
+function HeaderNav({ opened, setOpened }: Props) {
   const { classes } = useStyle();
   return (
     <Header className={classes.header} height={60} py="md">
-      <MediaQuery
-        largerThan="sm"
-        styles={{ backgroundColor: "green", display: "none" }}
-      >
-        <Nav />
+      <Nav />
+      <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+        <Burger opened={opened} onClick={() => setOpened((o) => !o)} />
       </MediaQuery>
     </Header>
   );

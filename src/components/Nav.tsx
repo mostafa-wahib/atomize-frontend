@@ -1,4 +1,4 @@
-import { Box, createStyles } from "@mantine/core";
+import { Box, createStyles, MediaQuery } from "@mantine/core";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext, UserContextInterface } from "../context/UserContext";
@@ -25,15 +25,17 @@ function Nav() {
   const { userData }: UserContextInterface = useContext(UserContext);
   const { classes } = useStyles();
   return (
-    <Box className={classes["header-nav"]}>
-      <Link to="/">Home</Link>
-      {!userData.loggedIn && (
-        <Link style={{ marginLeft: "auto" }} to="/login">
-          Login
-        </Link>
-      )}
-      {!userData.loggedIn && <Link to="/register">Register</Link>}
-    </Box>
+    <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+      <Box className={classes["header-nav"]}>
+        <Link to="/">Home</Link>
+        {!userData.loggedIn && (
+          <Link style={{ marginLeft: "auto" }} to="/login">
+            Login
+          </Link>
+        )}
+        {!userData.loggedIn && <Link to="/register">Register</Link>}
+      </Box>
+    </MediaQuery>
   );
 }
 
