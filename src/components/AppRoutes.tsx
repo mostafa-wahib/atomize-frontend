@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import { UserContextInterface, UserContext } from "../context/UserContext";
-import Landing from "../pages/Landing";
-import Login from "../pages/Login";
-import Register from "../pages/Register";
 import { useContext } from "react";
 import { createStyles } from "@mantine/core";
+import RegisterForm from "./RegisterForm";
+import LoginForm from "./LoginForm";
+import MainPage from "./MainPage";
 const useStyles = createStyles((theme) => ({
   form: {
     width: "50%",
@@ -27,12 +27,15 @@ function AppRoutes() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<MainPage />} />
         {!userData.loggedIn && (
-          <Route path="/register" element={<Register classes={classes} />} />
+          <Route
+            path="/register"
+            element={<RegisterForm classes={classes} />}
+          />
         )}
         {!userData.loggedIn && (
-          <Route path="/login" element={<Login classes={classes} />} />
+          <Route path="/login" element={<LoginForm classes={classes} />} />
         )}
       </Routes>
     </>
