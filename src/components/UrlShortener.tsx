@@ -14,8 +14,18 @@ interface UrlData {
   url: string;
 }
 type Short = string | null;
+const useStyles = createStyles((theme) => ({
+  urlForm: {
+    width: "50%",
+  },
+  button: {
+    backgroundColor: theme.colors.accent[0],
+    "&:hover": { backgroundColor: theme.colors.accent[1] },
+  },
+}));
 function UrlShortener() {
   const [short, setShort] = useState<Short>(null);
+  const { classes } = useStyles();
   const form = useForm<UrlData>({
     initialValues: {
       url: "",
@@ -33,16 +43,21 @@ function UrlShortener() {
     form.setFieldError("url", "something went wrong");
   }
   return (
-    <Center sx={() => ({ height: "100%" })}>
-      <form onSubmit={form.onSubmit((values) => handleShorten(values))}>
+    <Center sx={() => ({ height: "100%", width: "100%" })}>
+      <form
+        className={classes.urlForm}
+        onSubmit={form.onSubmit((values) => handleShorten(values))}
+      >
         <TextInput
-          size="lg"
+          size="xl"
           placeholder="Enter your url"
           {...form.getInputProps("url")}
         />
         <Center>
           <Group position="center" mt="md">
-            <Button type="submit">Shorten</Button>
+            <Button size="lg" className={classes.button} type="submit">
+              Shorten
+            </Button>
           </Group>
         </Center>
         <Center mt="md">

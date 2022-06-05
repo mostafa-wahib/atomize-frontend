@@ -74,3 +74,6 @@ select {
     scroll-behavior: auto !important;
   }
 }
+#root {
+  height: 100%;
+}
