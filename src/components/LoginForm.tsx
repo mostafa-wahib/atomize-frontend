@@ -76,7 +76,7 @@ function LoginForm({ classes }: any) {
 
             <Group position="center" mt="md">
               <Button className={classes.button} type="submit">
-                Submit
+                {loading ? "Signing in..." : "Login"}
               </Button>
             </Group>
           </form>

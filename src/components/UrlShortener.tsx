@@ -56,7 +56,7 @@ function UrlShortener() {
         <Center>
           <Group position="center" mt="md">
             <Button size="lg" className={classes.button} type="submit">
-              Shorten
+              {loading ? "Loading..." : "Shorten"}
             </Button>
           </Group>
         </Center>

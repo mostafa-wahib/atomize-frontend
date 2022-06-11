@@ -77,7 +77,7 @@ function RegisterForm({ classes }: any) {
             />
             <Group position="center" mt="md">
               <Button className={classes.button} type="submit">
-                Submit
+                {loading ? "Loading..." : "Register"}
               </Button>
             </Group>
           </form>
