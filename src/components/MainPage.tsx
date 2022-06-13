@@ -1,4 +1,4 @@
-import { Center, createStyles, Grid, Title, Text } from "@mantine/core";
+import { Center, createStyles, Grid, Title, Text, Image } from "@mantine/core";
 import UrlShortener from "./UrlShortener";
 const useStyle = createStyles(() => ({
   wrapper: { alignItems: "stretch", height: "100%" },
@@ -13,11 +13,15 @@ const MainPage: React.FC = () => {
         <Center className={classes.intro}>
           <Title className={classes.title}>Atomize</Title>
         </Center>
-        <Center mt="md">
-          <Text> Test</Text>
-        </Center>
       </Grid.Col>
-      <Grid.Col lg={6}></Grid.Col>
+      <Grid.Col lg={6}>
+        <Image
+          radius="md"
+          src="shorten-removebg.png"
+          alt="Loading..."
+          fit="contain"
+        />
+      </Grid.Col>
       <Grid.Col
         span={12}
         sx={(theme) => ({

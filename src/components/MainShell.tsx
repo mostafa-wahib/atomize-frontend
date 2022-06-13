@@ -10,7 +10,7 @@ function MainShell() {
       header={<HeaderNav opened={opened} setOpened={setOpened} />}
       styles={(theme) => ({
         main: {
-          backgroundColor: theme.colors.gray[2],
+          backgroundColor: theme.colors.gray[0],
           minHeight: "calc(100vh - 60px)",
         },
       })}

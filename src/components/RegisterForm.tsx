@@ -29,25 +29,23 @@ function RegisterForm({ classes }: any) {
   );
   const [serverError, setServerError] = useState<ServerError>(null);
   async function registerUser(data: UserRegistrationData) {
-    try {
-      await post("/users", data);
-      if (response.ok) navigate("/login");
-      console.log("status: ", response.status);
-      switch (response.status) {
-        case 404:
-          setServerError(
-            "It seems like our service is down. Please try again later."
-          );
-          break;
-        case 409:
-          form.setFieldError("email", "This username already exists.");
-          break;
-        default:
-          setServerError(
-            "Our service could not process your request. Please try again later"
-          );
-      }
-    } catch (err: any) {}
+    await post("/users", data);
+    if (response.ok) navigate("/login");
+    console.log("status: ", response.status);
+    switch (response.status) {
+      case 404:
+        setServerError(
+          "It seems like our service is down. Please try again later."
+        );
+        break;
+      case 409:
+        form.setFieldError("email", "This username already exists.");
+        break;
+      default:
+        setServerError(
+          "Our service could not process your request. Please try again later"
+        );
+    }
   }
   return (
     <Center className={classes.register}>
