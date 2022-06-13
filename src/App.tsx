@@ -17,7 +17,12 @@ function App() {
     },
   };
   return (
-    <MantineProvider theme={theme}>
+    <MantineProvider
+      theme={theme}
+      withGlobalStyles
+      withNormalizeCSS
+      withCSSVariables
+    >
       <MainShell />
     </MantineProvider>
   );

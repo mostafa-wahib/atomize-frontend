@@ -17,6 +17,7 @@ import {
   UserData,
 } from "../context/UserContext";
 import loginSchema from "../schemas/login.schema";
+import classes from "../styles/LoginForm.module.scss";
 export interface LoginData {
   email: string;
   password: string;
@@ -25,7 +26,7 @@ export interface LoginResponse {
   accessToken: string;
   refreshToken: string;
 }
-function LoginForm({ classes }: any) {
+const LoginForm: React.FC = () => {
   const form: UseFormReturnType<LoginData> = useForm<LoginData>({
     schema: zodResolver(loginSchema),
     initialValues: {
@@ -49,7 +50,6 @@ function LoginForm({ classes }: any) {
         ...response.data,
       };
       setUserData(updatedData);
-      // console.log("updated userData: ", userData);
       return navigate("/");
     }
   }
@@ -75,7 +75,7 @@ function LoginForm({ classes }: any) {
             />
 
             <Group position="center" mt="md">
-              <Button className={classes.button} type="submit">
+              <Button className={classes["main-button"]} type="submit">
                 {loading ? "Signing in..." : "Login"}
               </Button>
             </Group>
@@ -84,6 +84,6 @@ function LoginForm({ classes }: any) {
       </Card>
     </Center>
   );
-}
+};
 
 export default LoginForm;

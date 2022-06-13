@@ -11,14 +11,14 @@ import registrationSchema from "../schemas/registration.schema";
 import { useFetch } from "use-http";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import classes from "../styles/RegisterForm.module.scss";
 interface UserRegistrationData {
   email: string;
   password: string;
   passwordConfirmation: string;
 }
 type ServerError = string | null;
-function RegisterForm({ classes }: any) {
+const RegisterForm: React.FC = () => {
   const form = useForm<UserRegistrationData>({
     schema: zodResolver(registrationSchema),
     initialValues: { email: "", password: "", passwordConfirmation: "" },
@@ -74,7 +74,7 @@ function RegisterForm({ classes }: any) {
               {...form.getInputProps("passwordConfirmation")}
             />
             <Group position="center" mt="md">
-              <Button className={classes.button} type="submit">
+              <Button className={classes["main-button"]} type="submit">
                 {loading ? "Loading..." : "Register"}
               </Button>
             </Group>
@@ -83,5 +83,5 @@ function RegisterForm({ classes }: any) {
       </Card>
     </Center>
   );
-}
+};
 export default RegisterForm;

@@ -1,16 +1,11 @@
-import { createStyles, Header, MediaQuery, Burger } from "@mantine/core";
+import { Header, MediaQuery, Burger } from "@mantine/core";
 import Nav from "./Nav";
+import classes from "../styles/HeaderNav.module.scss";
 interface Props {
   opened: boolean;
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const useStyle = createStyles((theme) => ({
-  header: {
-    padding: `0 ${theme.spacing.xl}px`,
-  },
-}));
 function HeaderNav({ opened, setOpened }: Props) {
-  const { classes } = useStyle();
   return (
     <Header className={classes.header} height={60} py="md">
       <Nav />

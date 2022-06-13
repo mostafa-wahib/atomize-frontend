@@ -1,4 +1,6 @@
 import { Center, createStyles, Grid, Title, Text, Image } from "@mantine/core";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 import UrlShortener from "./UrlShortener";
 const useStyle = createStyles(() => ({
   wrapper: { alignItems: "stretch", height: "100%" },
@@ -7,6 +9,7 @@ const useStyle = createStyles(() => ({
 }));
 const MainPage: React.FC = () => {
   const { classes } = useStyle();
+  const user = useContext(UserContext);
   return (
     <Grid className={classes.wrapper}>
       <Grid.Col lg={6} sm={12}>
@@ -26,7 +29,7 @@ const MainPage: React.FC = () => {
         span={12}
         sx={(theme) => ({
           flex: 1,
-          backgroundColor: theme.colors.gray[4],
+          backgroundColor: theme.colors.gray[1],
         })}
       >
         <UrlShortener />
