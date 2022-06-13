@@ -2,18 +2,13 @@ import { AppShell } from "@mantine/core";
 import { useState } from "react";
 import AppRoutes from "./AppRoutes";
 import HeaderNav from "./HeaderNav";
+import classes from "../styles/MainShell.module.scss";
 function MainShell() {
   const [opened, setOpened] = useState(false);
   return (
     <AppShell
-      padding="md"
+      className={classes.main}
       header={<HeaderNav opened={opened} setOpened={setOpened} />}
-      styles={(theme) => ({
-        main: {
-          backgroundColor: theme.colors.gray[0],
-          minHeight: "calc(100vh - 60px)",
-        },
-      })}
       fixed
       navbarOffsetBreakpoint="sm"
     >

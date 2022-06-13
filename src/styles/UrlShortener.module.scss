@@ -1,0 +1,9 @@
+@use "buttons.module.scss";
+.container {
+  background-color: var(--mantine-color-gray-1);
+  height: 100%;
+  width: 100%;
+}
+.url-form {
+  width: 50%;
+}

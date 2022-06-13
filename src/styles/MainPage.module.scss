@@ -1,0 +1,10 @@
+.wrapper {
+  align-items: stretch;
+  height: 100%;
+}
+.intro {
+  padding-top: 15rem;
+}
+.title {
+  font-size: clamp(4rem, 3vw + 1rem, 10rem);
+}

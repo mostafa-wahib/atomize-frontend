@@ -1,31 +1,15 @@
-import {
-  Button,
-  Center,
-  createStyles,
-  Group,
-  Text,
-  TextInput,
-} from "@mantine/core";
+import { Button, Center, Group, Text, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useState } from "react";
 import useFetch from "use-http";
 import urlSchema from "../schemas/url.schema";
+import classes from "../styles/UrlShortener.module.scss";
 interface UrlData {
   url: string;
 }
 type Short = string | null;
-const useStyles = createStyles((theme) => ({
-  urlForm: {
-    width: "50%",
-  },
-  button: {
-    backgroundColor: theme.colors.accent[0],
-    "&:hover": { backgroundColor: theme.colors.accent[1] },
-  },
-}));
-function UrlShortener() {
+const UrlShortener: React.FC = () => {
   const [short, setShort] = useState<Short>(null);
-  const { classes } = useStyles();
   const form = useForm<UrlData>({
     initialValues: {
       url: "",
@@ -33,7 +17,7 @@ function UrlShortener() {
     schema: zodResolver(urlSchema),
   });
 
-  const { error, post, loading, response } = useFetch(
+  const { post, loading, response } = useFetch(
     `${process.env.REACT_APP_serveruri}/v1`
   );
   async function handleShorten(data: UrlData) {
@@ -43,9 +27,9 @@ function UrlShortener() {
     form.setFieldError("url", "something went wrong");
   }
   return (
-    <Center sx={() => ({ height: "100%", width: "100%" })}>
+    <Center className={classes.container}>
       <form
-        className={classes.urlForm}
+        className={classes["url-form"]}
         onSubmit={form.onSubmit((values) => handleShorten(values))}
       >
         <TextInput
@@ -55,7 +39,7 @@ function UrlShortener() {
         />
         <Center>
           <Group position="center" mt="md">
-            <Button size="lg" className={classes.button} type="submit">
+            <Button size="lg" className={classes["main-button"]} type="submit">
               {loading ? "Loading..." : "Shorten"}
             </Button>
           </Group>
@@ -71,6 +55,6 @@ function UrlShortener() {
       </form>
     </Center>
   );
-}
+};
 
 export default UrlShortener;
