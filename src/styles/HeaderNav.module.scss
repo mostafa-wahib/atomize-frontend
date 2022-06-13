@@ -1,10 +1,10 @@
-$burger_breakpoint: var(--mantine-breakpoints-md);
+@use "_global";
 .header {
   padding-inline: var(--mantine-spacing-xl);
 }
 .burger {
   display: block;
-  @media (min-width: $burger_breakpoint) {
+  @media (min-width: global.$nav_breakpoint) {
     display: none;
   }
 }

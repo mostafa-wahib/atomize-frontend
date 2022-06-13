@@ -1,0 +1,18 @@
+@use "_global";
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  @media (max-width: global.$nav_breakpoint) {
+    display: none;
+  }
+  a {
+    text-decoration: none;
+    color: var(--mantine-color-accent-1);
+    font-size: map-get(global.$fontsize, sm);
+    @media (min-width: global.$nav_breakpoint) {
+      font-size: map-get(global.$fontsize, md);
+    }
+  }
+}
