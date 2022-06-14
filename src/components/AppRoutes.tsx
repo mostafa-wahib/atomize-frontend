@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { UserContextInterface, UserContext } from "../context/UserContext";
 import { useContext } from "react";
-import { createStyles } from "@mantine/core";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import MainPage from "./MainPage";

@@ -1,5 +1,6 @@
 import MainShell from "./components/MainShell";
 import { MantineProvider, MantineThemeOverride } from "@mantine/core";
+import UserContextProvider from "./context/UserContext";
 function App() {
   const theme: MantineThemeOverride = {
     fontFamily: "Red Hat Display",
@@ -23,7 +24,9 @@ function App() {
       withNormalizeCSS
       withCSSVariables
     >
-      <MainShell />
+      <UserContextProvider>
+        <MainShell />
+      </UserContextProvider>
     </MantineProvider>
   );
 }

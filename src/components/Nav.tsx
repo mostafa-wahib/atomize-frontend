@@ -19,6 +19,7 @@ function Nav() {
       refreshToken: "",
       loggedIn: false,
     });
+    console.log("status: ", response.status);
   };
   const { del, response } = useFetch(`${process.env.REACT_APP_serveruri}/v1`);
   const { userData, setUserData } = useContext(
@@ -36,9 +37,7 @@ function Nav() {
         </Link>
       )}
       {!userData.loggedIn && <Link to="/register">Register</Link>}
-      {userData.loggedIn && (
-        <Button onClick={() => handleLogout}>Logout</Button>
-      )}
+      {userData.loggedIn && <Button onClick={handleLogout}>Logout</Button>}
     </Box>
   );
 }

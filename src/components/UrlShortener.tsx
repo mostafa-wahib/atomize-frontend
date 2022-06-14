@@ -22,11 +22,23 @@ const UrlShortener: React.FC = () => {
   });
 
   const { post, loading, response } = useFetch(
-    `${process.env.REACT_APP_serveruri}/v1`
+    `${process.env.REACT_APP_serveruri}/v1`,
+    {
+      headers: {
+        ...(userData.loggedIn && {
+          Authorization: `Bearer ${userData.accessToken}`,
+          "x-refresh": userData.refreshToken,
+        }),
+      },
+    }
   );
   async function handleShorten(data: UrlData) {
+    const postData = {
+      url: data.url,
+      ...(userData.loggedIn && data.short !== "" && { short: data.short }),
+    };
     setShort(null);
-    await post("/url/shorten", data);
+    await post("/url/shorten", postData);
     if (response.ok) return setShort(response.data.short);
     form.setFieldError("url", "something went wrong");
   }
