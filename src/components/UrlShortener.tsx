@@ -1,18 +1,22 @@
 import { Button, Center, Group, Text, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useFetch from "use-http";
+import { UserContext, UserContextInterface } from "../context/UserContext";
 import urlSchema from "../schemas/url.schema";
 import classes from "../styles/UrlShortener.module.scss";
 interface UrlData {
   url: string;
+  short?: string | null;
 }
 type Short = string | null;
 const UrlShortener: React.FC = () => {
+  const { userData } = useContext(UserContext) as UserContextInterface;
   const [short, setShort] = useState<Short>(null);
   const form = useForm<UrlData>({
     initialValues: {
       url: "",
+      short: "",
     },
     schema: zodResolver(urlSchema),
   });
@@ -37,6 +41,13 @@ const UrlShortener: React.FC = () => {
           placeholder="Enter your url"
           {...form.getInputProps("url")}
         />
+        {userData.loggedIn && (
+          <TextInput
+            size="xl"
+            placeholder="custom short"
+            {...form.getInputProps("short")}
+          />
+        )}
         <Center>
           <Group position="center" mt="md">
             <Button size="lg" className={classes["main-button"]} type="submit">

@@ -34,10 +34,10 @@ const LoginForm: React.FC = () => {
       password: "",
     },
   });
-  const { userData, setUserData } = useContext(
+  const { setUserData, userData } = useContext(
     UserContext
   ) as UserContextInterface;
-  const { error, post, loading, response } = useFetch<LoginResponse>(
+  const { post, loading, response } = useFetch<LoginResponse>(
     `${process.env.REACT_APP_serveruri}/v1`
   );
   const navigate = useNavigate();
@@ -52,7 +52,21 @@ const LoginForm: React.FC = () => {
       setUserData(updatedData);
       return navigate("/");
     }
+    switch (response.status) {
+      case 401:
+        form.setFieldError("password", "The username or password is incorrect");
+        break;
+      default:
+        form.setFieldError(
+          "password",
+          "Something went wrong! Please try again later"
+        );
+    }
+    console.log("rejected with code: ", response.status);
   }
+  useEffect(() => {
+    console.log("Loginform: userData changed, ", JSON.stringify(userData));
+  }, [userData]);
   return (
     <Center style={{ minHeight: "100vh", minWidth: "100vw" }}>
       <Card shadow="sm" className={classes.form__card}>
@@ -62,13 +76,11 @@ const LoginForm: React.FC = () => {
             onSubmit={form.onSubmit((values: LoginData) => handleLogin(values))}
           >
             <TextInput
-              required
               label="Email"
               placeholder="your@email.com"
               {...form.getInputProps("email")}
             />
             <PasswordInput
-              required
               label="Password"
               placeholder=""
               {...form.getInputProps("password")}
