@@ -1,6 +1,6 @@
 import { Button, Center, Group, Text, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useFetch from "use-http";
 import { UserContext, UserContextInterface } from "../context/UserContext";
 import urlSchema from "../schemas/url.schema";
@@ -42,6 +42,9 @@ const UrlShortener: React.FC = () => {
     if (response.ok) return setShort(response.data.short);
     form.setFieldError("url", "something went wrong");
   }
+  useEffect(() => {
+    setShort(null);
+  }, [userData.loggedIn]);
   return (
     <Center className={classes.container}>
       <form
