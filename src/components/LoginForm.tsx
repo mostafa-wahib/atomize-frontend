@@ -62,11 +62,7 @@ const LoginForm: React.FC = () => {
           "Something went wrong! Please try again later"
         );
     }
-    console.log("rejected with code: ", response.status);
   }
-  useEffect(() => {
-    console.log("Loginform: userData changed, ", JSON.stringify(userData));
-  }, [userData.loggedIn]);
   return (
     <Center style={{ minHeight: "100vh", minWidth: "100vw" }}>
       <Card shadow="sm" className={classes.form__card}>

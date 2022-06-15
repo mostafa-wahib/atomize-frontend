@@ -6,10 +6,7 @@ import { UserContext, UserContextInterface } from "../context/UserContext";
 import classes from "../styles/Nav.module.scss";
 function Nav() {
   const handleLogout = async () => {
-    await del("/sessions", {
-      accessToken: userData.accessToken,
-      refreshToken: userData.refreshToken,
-    });
+    await del("/sessions");
     if (response.ok) {
       console.log("Successfully logged out with code: ", response.status);
     }
