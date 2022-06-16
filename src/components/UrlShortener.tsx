@@ -20,17 +20,18 @@ const UrlShortener: React.FC = () => {
     },
     schema: zodResolver(urlSchema),
   });
-
+  const authHeaders = {
+    Authorization: `Bearer ${userData.accessToken}`,
+    "x-refresh": userData.refreshToken,
+  };
+  console.log("UrlShortener rerender");
+  useEffect(() => {
+    setShort(null);
+  }, [userData.loggedIn]);
+  console.log("user is logged in: ", userData.loggedIn);
   const { post, loading, response } = useFetch(
     `${process.env.REACT_APP_serveruri}/v1`,
-    {
-      headers: {
-        ...(userData.loggedIn && {
-          Authorization: `Bearer ${userData.accessToken}`,
-          "x-refresh": userData.refreshToken,
-        }),
-      },
-    }
+    { ...(userData.loggedIn && { headers: authHeaders }) }
   );
   async function handleShorten(data: UrlData) {
     const postData = {
@@ -42,14 +43,11 @@ const UrlShortener: React.FC = () => {
     if (response.ok) return setShort(response.data.short);
     form.setFieldError("url", "something went wrong");
   }
-  useEffect(() => {
-    setShort(null);
-  }, [userData.loggedIn]);
   return (
     <Center className={classes.container}>
       <form
         className={classes["url-form"]}
-        onSubmit={form.onSubmit((values) => handleShorten(values))}
+        onSubmit={form.onSubmit(handleShorten)}
       >
         <TextInput
           size="xl"
