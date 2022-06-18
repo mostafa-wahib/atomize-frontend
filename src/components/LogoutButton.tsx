@@ -9,12 +9,7 @@ const LogoutButton: React.FC = () => {
   const { userData, setUserData } = useContext(
     UserContext
   ) as UserContextInterface;
-  const { del, response } = useFetch(`${process.env.REACT_APP_serveruri}/v1`, {
-    headers: {
-      Authorization: `Bearer ${userData.accessToken}`,
-      "x-refresh": userData.refreshToken,
-    },
-  });
+  const { del, response } = useFetch(`${process.env.REACT_APP_serveruri}/v1`);
 
   const handleLogout = async () => {
     await del("/sessions");
